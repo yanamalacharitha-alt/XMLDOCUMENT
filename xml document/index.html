@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <title>DOMParser Example</title>
+    </head>
+    <body>
+        <script src="index.html"></script>
+        <h2> Student Details</h2>
+        <p id="output"></p>
+        <script>
+            
+            let parser = new DOMParser();
+            let xmlData  = `
+            <student>
+                <name>charitha</name>
+                <rollno>101</rollno>
+                <course>csit</course>
+                </student>
+                `;
+            
+                
+                let xmlDoc = parser.ParserFromString(xmlData,"text/xml");
+                let name = xmlDoc.getElementByTagName("name")[0].textContent;
+                document.getElementById("output").innerHTML = name;
+
+        </script>
+    </body>
+</html>

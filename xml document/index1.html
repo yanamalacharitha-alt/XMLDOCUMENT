@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>DOMParser Project</title>
+
+    <style>
+        body{
+            font-family: Arial;
+            background-color: #f2f2f2;
+            padding: 20px;
+        }
+
+        h1{
+            color: darkblue;
+        }
+
+        .card{
+            background: white;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-radius: 10px;
+            box-shadow: 0px 0px 5px gray;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Student Details Using DOMParser</h1>
+
+    <div id="output"></div>
+
+    <script>
+
+        // XML Data
+        let xmlData = `
+        <students>
+
+            <student>
+                <id>101</id>
+                <name>Charitha</name>
+                <course>JavaScript</course>
+            </student>
+
+            <student>
+                <id>102</id>
+                <name>pavan</name>
+                <course>Java</course>
+            </student>
+
+        </students>
+        `;
+
+        // Step 1: Create DOMParser object
+        let parser = new DOMParser();
+
+        // Step 2: Convert XML string into XML Document
+        let xmlDoc = parser.parseFromString(xmlData, "text/xml");
+
+        // Step 3: Get all student nodes
+        let students = xmlDoc.getElementsByTagName("student");
+
+        // Step 4: Select output div
+        let output = document.getElementById("output");
+
+        // Step 5: Loop through students
+        for(let i = 0; i < students.length; i++)
+        {
+            let id =
+            students[i].getElementsByTagName("id")[0].textContent;
+
+            let name =
+            students[i].getElementsByTagName("name")[0].textContent;
+
+            let course =
+            students[i].getElementsByTagName("course")[0].textContent;
+
+            // Create HTML
+            output.innerHTML += `
+            <div class="card">
+                <h3>ID: ${id}</h3>
+                <p>Name: ${name}</p>
+                <p>Course: ${course}</p>
+            </div>
+            `;
+        }
+
+    </script>
+
+</body>
+</html>
